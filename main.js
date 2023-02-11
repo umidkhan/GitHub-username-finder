@@ -9,6 +9,7 @@ const bot = new TelegramApi(token, { polling: true });
 
 bot.setMyCommands([
   { command: "/start", description: "Botni ishga tushirish" },
+  { command: "/clear", description: "Botni tozalash" },
 ]);
 
 bot.on("message", async (msg) => {
@@ -20,7 +21,10 @@ bot.on("message", async (msg) => {
       `Assalomu alaykum <b>${msg.chat.first_name}</b> 👋\nBotga xush kelibsiz\nUshbu bot GitHub platformasidagi foydalanuvchilarni topib beradi\nShunchaki <b>GitHub</b> username <i>(foydalanuvchi nomi)</i>ni kiriting va sizga ma'lumotlarni yuboraman\n<a href="https://docs.github.com/en">GitHub haqida</a>`,
       { parse_mode: "HTML" }
     ), bot.sendMessage(umidxonId, `@${msg.chat.username} follow your bot`)
-  } else {
+  } else if (text === "/clear") {
+    bot.deleteMessage(chatId, msg.message_id)
+  }
+  else {
     axios
       .get(`${url}${text}`)
       .then((res) => {
