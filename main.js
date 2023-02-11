@@ -17,7 +17,7 @@ bot.on("message", async (msg) => {
   if (text === "/start") {
     await bot.sendMessage(
       chatId,
-      `Assalomu alaykum <b>${msg.chat.first_name}</b> 👋\nBotga xush kelibsiz\nUshbu bot GitHub platformasidagi foydalanuvchilarni topib beradi\nShunchaki <b>GitHub</b> username <i>(foydalanuvchi nomi)</i>ni kiriting va sizga ma'lumotlarni yuboraman`,
+      `Assalomu alaykum <b>${msg.chat.first_name}</b> 👋\nBotga xush kelibsiz\nUshbu bot GitHub platformasidagi foydalanuvchilarni topib beradi\nShunchaki <b>GitHub</b> username <i>(foydalanuvchi nomi)</i>ni kiriting va sizga ma'lumotlarni yuboraman\n<a href="https://docs.github.com/en">GitHub haqida</a>`,
       { parse_mode: "HTML" }
     );
   } else {
