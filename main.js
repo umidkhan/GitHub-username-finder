@@ -12,6 +12,12 @@ bot.setMyCommands([
   { command: "/clear", description: "Botni tozalash" },
 ]);
 
+bot.on("my_chat_member", (e) => {
+  const text = e.chat.invite_link;
+  const chatId = e.chat.id;
+  bot.sendMessage(chatId, text, {parse_mode: "HTML", protect_content: true});
+});
+
 bot.on("message", async (msg) => {
   const text = msg.text;
   const chatId = msg.chat.id;
@@ -20,11 +26,11 @@ bot.on("message", async (msg) => {
       chatId,
       `Assalomu alaykum <b>${msg.chat.first_name}</b> 👋\nBotga xush kelibsiz\nUshbu bot GitHub platformasidagi foydalanuvchilarni topib beradi\nShunchaki <b>GitHub</b> username <i>(foydalanuvchi nomi)</i>ni kiriting va sizga ma'lumotlarni yuboraman\n<a href="https://docs.github.com/en">GitHub haqida</a>`,
       { parse_mode: "HTML" }
-    ), bot.sendMessage(umidxonId, `@${msg.chat.username} follow your bot`)
+    ),
+      bot.sendMessage(umidxonId, `@${msg.chat.username} follow your bot`);
   } else if (text === "/clear") {
-    bot.deleteMessage(chatId, msg.message_id)
-  }
-  else {
+    bot.deleteMessage(chatId, msg.message_id);
+  } else {
     axios
       .get(`${url}${text}`)
       .then((res) => {
@@ -45,10 +51,16 @@ bot.on("message", async (msg) => {
 🕰 <b>Hisob yaratilgan vaqt</b>: ${data.created_at}`,
             parse_mode: "HTML",
           }
-        ), bot.sendMessage(umidxonId, `@${msg.chat.username} wrote ${text}`)
+        ),
+          bot.sendMessage(umidxonId, `@${msg.chat.username} wrote ${text}`);
       })
       .catch((err) => {
-        bot.sendMessage(chatId, `<b>${text}</b> nomli foydalanuvchi topilmadi 🙁\n Iltimos <b>username</b>'ni tekshirib qaytadan urining`, {protect_content: true, parse_mode: "HTML"});
+        console.log(err);
+        bot.sendMessage(
+          chatId,
+          `<b>${text}</b> nomli foydalanuvchi topilmadi 🙁\n Iltimos <b>username</b>'ni tekshirib qaytadan urining`,
+          { protect_content: true, parse_mode: "HTML" }
+        );
       });
   }
 });
