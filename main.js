@@ -44,7 +44,7 @@ bot.on("message", async (msg) => {
         );
       })
       .catch((err) => {
-        bot.sendMessage(chatId, `${text} nomli foydalanuvchi topilmadi 🙁`);
+        bot.sendMessage(chatId, `<b>${text}</b> nomli foydalanuvchi topilmadi 🙁\n Iltimos <b>username</b>'ni tekshirib qaytadan urining`, {protect_content: true, parse_mode: "HTML"});
       });
   }
 });
